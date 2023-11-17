@@ -25,6 +25,6 @@ phases:
       - printf '[{"name":"%s","ImageURI":"%s"}]' $ECR_REPOSITORY_NAME ${REPOSITORY_URI}:${IMAGE_TAG} > imagedefinitions.json
 artifacts:
   files:
-    - imageDetail.json
+    - imagedefinitions.json
     - appspec.yml
     - taskdef.json
