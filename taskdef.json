@@ -1,0 +1,90 @@
+{
+  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-1:509074386871:task-definition/cnapp-ecs-task:3",
+  "containerDefinitions": [
+    {
+      "name": "cnappdemo",
+      "image": "<IMAGE1_NAME>",
+      "cpu": 512,
+      "memoryReservation": 256,
+      "portMappings": [
+        {
+          "name": "cnappdemo-80-tcp",
+          "containerPort": 80,
+          "hostPort": 80,
+          "protocol": "tcp",
+          "appProtocol": "http"
+        }
+      ],
+      "essential": true,
+      "secrets": [
+        {
+          "name": "CNAPP_DB_HOST",
+          "valueFrom": "cnapp-param-db-host"
+        },
+        {
+          "name": "CNAPP_DB_NAME",
+          "valueFrom": "cnapp-param-db-name"
+        },
+        {
+          "name": "CNAPP_DB_PASSWORD",
+          "valueFrom": "cnapp-param-db-password"
+        },
+        {
+          "name": "CNAPP_DB_USERNAME",
+          "valueFrom": "cnapp-param-db-username"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/cnapp-task",
+          "awslogs-region": "ap-northeast-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ],
+  "family": "cnapp-ecs-task",
+  "executionRoleArn": "arn:aws:iam::509074386871:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
+  "revision": 3,
+  "volumes": [],
+  "status": "ACTIVE",
+  "requiresAttributes": [
+    {
+      "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+    },
+    {
+      "name": "ecs.capability.execution-role-awslogs"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.ecr-auth"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+    },
+    {
+      "name": "ecs.capability.execution-role-ecr-pull"
+    },
+    {
+      "name": "ecs.capability.secrets.ssm.environment-variables"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+    },
+    {
+      "name": "ecs.capability.task-eni"
+    }
+  ],
+  "compatibilities": ["EC2", "FARGATE"],
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "3072",
+  "runtimePlatform": {
+    "cpuArchitecture": "X86_64",
+    "operatingSystemFamily": "LINUX"
+  },
+  "registeredAt": "2023-11-17T06:13:33.320Z",
+  "registeredBy": "arn:aws:iam::509074386871:root",
+  "tags": []
+}
